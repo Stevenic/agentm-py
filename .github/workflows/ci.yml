@@ -12,16 +12,20 @@ jobs:
   test:
     runs-on: self-hosted
 
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]  # Test across these Python versions
+
     steps:
       # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
       # Set up Python
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: ${{ matrix.python-version }}
 
       # Install dependencies
       - name: Install dependencies
