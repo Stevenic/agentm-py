@@ -51,10 +51,17 @@ jobs:
           -d '{
             "streams": [
               {
-                "stream": { "job": "ci-cd-pipeline" },
+                "stream": { "job": "ci-cd-pipeline", "level": "INFO" },
                 "values": [
-                  ["'"$(date +%s%N)"'", "CI log entry 1"]
+                  ["'"$(date +%s%N)"'", "INFO: CI log entry 1"]
+                ]
+              },
+              {
+                "stream": { "job": "ci-cd-pipeline", "level": "ERROR" },
+                "values": [
+                  ["'"$(date +%s%N)"'", "ERROR: CI log entry 2"]
                 ]
               }
             ]
           }'
+
