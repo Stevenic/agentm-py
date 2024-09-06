@@ -8,6 +8,8 @@ requests = "*"
 
 [dev-packages]
 pytest = "*"
+black = "*"
+flake8 = "*"
 
 [requires]
 python_version = ">=3.9,<3.12"

@@ -12,3 +12,5 @@ pytest==8.3.2
 requests==2.32.3
 urllib3==2.2.2
 virtualenv==20.26.3
+black
+flake8
