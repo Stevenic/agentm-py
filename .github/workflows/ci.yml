@@ -46,6 +46,19 @@ jobs:
           LOKI_USER: ${{ secrets.LOKI_USER }}
           LOKI_PASS: ${{ secrets.LOKI_PASS }}
         run: |
+          TIMESTAMP=$(date +%s%N)
+          LOG_FILE=flake8-output.log
+          ERROR_LOG_FILE=black-output.log
+          TEST_LOG_FILE=pytest-output.log
+
+          # Capture CI job log status
+          CI_STATUS="INFO: CI job completed successfully"
+
+          # If any of the logs contain errors, adjust CI_STATUS
+          if grep -q "ERROR" $LOG_FILE || grep -q "ERROR" $ERROR_LOG_FILE || grep -q "ERROR" $TEST_LOG_FILE; then
+            CI_STATUS="ERROR: CI job encountered issues"
+          fi
+
           curl -u "$LOKI_USER:$LOKI_PASS" -X POST "$LOKI_URL/loki/api/v1/push" \
           -H "Content-Type: application/json" \
           -d '{
@@ -53,13 +66,13 @@ jobs:
               {
                 "stream": { "job": "ci-cd-pipeline", "level": "INFO" },
                 "values": [
-                  ["'"$(date +%s%N)"'", "INFO: CI log entry 1"]
+                  ["'"$TIMESTAMP"'", "'"$CI_STATUS"'"]
                 ]
               },
               {
                 "stream": { "job": "ci-cd-pipeline", "level": "ERROR" },
                 "values": [
-                  ["'"$(date +%s%N)"'", "ERROR: CI log entry 2"]
+                  ["'"$TIMESTAMP"'", "ERROR: '$(cat $LOG_FILE) $(cat $ERROR_LOG_FILE) $(cat $TEST_LOG_FILE)'"]
                 ]
               }
             ]
