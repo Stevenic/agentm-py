@@ -51,6 +51,16 @@ jobs:
           ERROR_LOG_FILE=black-output.log
           TEST_LOG_FILE=pytest-output.log
 
+          # Create temporary files to store escaped logs
+          ESCAPED_LOG_FILE=$(mktemp)
+          ESCAPED_ERROR_LOG_FILE=$(mktemp)
+          ESCAPED_TEST_LOG_FILE=$(mktemp)
+
+          # Escape log content for JSON
+          python -c "import json; import sys; print(json.dumps(open('$LOG_FILE').read()))" > $ESCAPED_LOG_FILE
+          python -c "import json; import sys; print(json.dumps(open('$ERROR_LOG_FILE').read()))" > $ESCAPED_ERROR_LOG_FILE
+          python -c "import json; import sys; print(json.dumps(open('$TEST_LOG_FILE').read()))" > $ESCAPED_TEST_LOG_FILE
+
           # Capture CI job log status
           CI_STATUS="INFO: CI job completed successfully"
 
@@ -58,11 +68,6 @@ jobs:
           if grep -q "ERROR" $LOG_FILE || grep -q "ERROR" $ERROR_LOG_FILE || grep -q "ERROR" $TEST_LOG_FILE; then
             CI_STATUS="ERROR: CI job encountered issues"
           fi
-
-          # Escape log content for JSON
-          ESCAPED_LOG=$(sed 's/"/\\"/g' $LOG_FILE | sed 's/\n/\\n/g')
-          ESCAPED_ERROR_LOG=$(sed 's/"/\\"/g' $ERROR_LOG_FILE | sed 's/\n/\\n/g')
-          ESCAPED_TEST_LOG=$(sed 's/"/\\"/g' $TEST_LOG_FILE | sed 's/\n/\\n/g')
 
           # Send logs to Loki
           curl -u "$LOKI_USER:$LOKI_PASS" -X POST "$LOKI_URL/loki/api/v1/push" \
@@ -78,9 +83,12 @@ jobs:
               {
                 "stream": { "job": "ci-cd-pipeline", "level": "ERROR" },
                 "values": [
-                  ["'"$TIMESTAMP"'", "'"$ESCAPED_LOG $ESCAPED_ERROR_LOG $ESCAPED_TEST_LOG"'"]
+                  ["'"$TIMESTAMP"'", "'"$(cat $ESCAPED_LOG_FILE) $(cat $ESCAPED_ERROR_LOG_FILE) $(cat $ESCAPED_TEST_LOG_FILE)"'"]
                 ]
               }
             ]
           }'
+
+          # Clean up temporary files
+          rm $ESCAPED_LOG_FILE $ESCAPED_ERROR_LOG_FILE $ESCAPED_TEST_LOG_FILE
 
