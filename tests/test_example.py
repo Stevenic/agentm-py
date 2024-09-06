@@ -8,10 +8,13 @@ def test_zero_division():
 
 
 # Parameterized test example using pytest.mark.parametrize
-@pytest.mark.parametrize("a, b, expected", [
-    (1, 2, 3),
-    (2, 3, 5),
-    (3, 5, 8),
-])
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (1, 2, 3),
+        (2, 3, 5),
+        (3, 5, 8),
+    ],
+)
 def test_addition(a, b, expected):
     assert a + b == expected
