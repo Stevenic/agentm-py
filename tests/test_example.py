@@ -2,7 +2,6 @@ import pytest
 
 
 # Example test with pytest.raises to handle exceptions
-
 def test_zero_division():
     with pytest.raises(ZeroDivisionError):
         1 / 0
@@ -14,6 +13,5 @@ def test_zero_division():
     (2, 3, 5),
     (3, 5, 8),
 ])
-
 def test_addition(a, b, expected):
     assert a + b == expected
