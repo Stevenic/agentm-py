@@ -59,6 +59,11 @@ jobs:
             CI_STATUS="ERROR: CI job encountered issues"
           fi
 
+          # Escape log content for JSON
+          ESCAPED_LOG=$(sed 's/"/\\"/g' $LOG_FILE | sed 's/\n/\\n/g')
+          ESCAPED_ERROR_LOG=$(sed 's/"/\\"/g' $ERROR_LOG_FILE | sed 's/\n/\\n/g')
+          ESCAPED_TEST_LOG=$(sed 's/"/\\"/g' $TEST_LOG_FILE | sed 's/\n/\\n/g')
+
           # Send logs to Loki
           curl -u "$LOKI_USER:$LOKI_PASS" -X POST "$LOKI_URL/loki/api/v1/push" \
           -H "Content-Type: application/json" \
@@ -73,7 +78,7 @@ jobs:
               {
                 "stream": { "job": "ci-cd-pipeline", "level": "ERROR" },
                 "values": [
-                  ["'"$TIMESTAMP"'", "'"$(cat $LOG_FILE) $(cat $ERROR_LOG_FILE) $(cat $TEST_LOG_FILE)"'"]
+                  ["'"$TIMESTAMP"'", "'"$ESCAPED_LOG $ESCAPED_ERROR_LOG $ESCAPED_TEST_LOG"'"]
                 ]
               }
             ]
