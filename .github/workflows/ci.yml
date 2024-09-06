@@ -40,22 +40,21 @@ jobs:
       - name: Run tests
         run: pytest | tee pytest-output.log
 
-      - name: Send logs to Loki
+      - name: Push logs to Loki
+        env:
+          LOKI_URL: ${{ secrets.LOKI_URL }}
+          LOKI_USER: ${{ secrets.LOKI_USER }}
+          LOKI_PASS: ${{ secrets.LOKI_PASS }}
         run: |
-          LOG_DATA=$(cat flake8-output.log black-output.log pytest-output.log)
-          curl -u ${{ secrets.LOKI_USERNAME }}:${{ secrets.LOKI_PASSWORD }} \
-            -H "Content-Type: application/json" \
-            -X POST ${{ secrets.LOKI_URL }}/loki/api/v1/push \
-            -d '{
-              "streams": [
-                {
-                  "stream": {
-                    "job": "ci-cd-pipeline"
-                  },
-                  "values": [
-                    ["'"$(date +%s%N)"'", "'"$LOG_DATA"'"]
-                  ]
-                }
-              ]
-            }'
-
+          curl -u "$LOKI_USER:$LOKI_PASS" -X POST "$LOKI_URL/loki/api/v1/push" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "streams": [
+              {
+                "stream": { "job": "ci-cd-pipeline" },
+                "values": [
+                  ["'"$(date +%s%N)"'", "CI log entry 1"]
+                ]
+              }
+            ]
+          }'
