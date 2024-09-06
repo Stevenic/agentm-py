@@ -14,34 +14,48 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]  # Test across these Python versions
+        python-version: ["3.9", "3.10", "3.11"]
 
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Python
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      # Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install black flake8
 
-      # Run linters (flake8)
       - name: Run flake8
-        run: flake8 src/ tests/
+        run: flake8 src/ tests/ | tee flake8-output.log
 
-      # Run code formatter (black)
       - name: Run black
-        run: black --check src/ tests/
+        run: black --check src/ tests/ | tee black-output.log
 
-      # Run tests (if any)
       - name: Run tests
-        run: pytest
+        run: pytest | tee pytest-output.log
+
+      - name: Send logs to Loki
+        run: |
+          LOG_DATA=$(cat flake8-output.log black-output.log pytest-output.log)
+          curl -u ${{ secrets.LOKI_USERNAME }}:${{ secrets.LOKI_PASSWORD }} \
+            -H "Content-Type: application/json" \
+            -X POST ${{ secrets.LOKI_URL }}/loki/api/v1/push \
+            -d '{
+              "streams": [
+                {
+                  "stream": {
+                    "job": "ci-cd-pipeline"
+                  },
+                  "values": [
+                    ["'"$(date +%s%N)"'", "'"$LOG_DATA"'"]
+                  ]
+                }
+              ]
+            }'
+
