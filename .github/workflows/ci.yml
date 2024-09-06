@@ -59,6 +59,7 @@ jobs:
             CI_STATUS="ERROR: CI job encountered issues"
           fi
 
+          # Send logs to Loki
           curl -u "$LOKI_USER:$LOKI_PASS" -X POST "$LOKI_URL/loki/api/v1/push" \
           -H "Content-Type: application/json" \
           -d '{
@@ -72,7 +73,7 @@ jobs:
               {
                 "stream": { "job": "ci-cd-pipeline", "level": "ERROR" },
                 "values": [
-                  ["'"$TIMESTAMP"'", "ERROR: '$(cat $LOG_FILE) $(cat $ERROR_LOG_FILE) $(cat $TEST_LOG_FILE)'"]
+                  ["'"$TIMESTAMP"'", "'"$(cat $LOG_FILE) $(cat $ERROR_LOG_FILE) $(cat $TEST_LOG_FILE)"'"]
                 ]
               }
             ]
