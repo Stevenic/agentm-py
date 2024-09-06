@@ -1,4 +1,3 @@
-import pytest
 
 # Example test function
 
