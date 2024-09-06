@@ -57,9 +57,9 @@ jobs:
           ESCAPED_TEST_LOG_FILE=$(mktemp)
 
           # Escape log content for JSON
-          python -c "import json; import sys; print(json.dumps(open('$LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_LOG_FILE
-          python -c "import json; import sys; print(json.dumps(open('$ERROR_LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_ERROR_LOG_FILE
-          python -c "import json; import sys; print(json.dumps(open('$TEST_LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_TEST_LOG_FILE
+          python -c "import json, sys; sys.stdout.write(json.dumps(open('$LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_LOG_FILE
+          python -c "import json, sys; sys.stdout.write(json.dumps(open('$ERROR_LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_ERROR_LOG_FILE
+          python -c "import json, sys; sys.stdout.write(json.dumps(open('$TEST_LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_TEST_LOG_FILE
 
           # Capture CI job log status
           CI_STATUS="INFO: CI job completed successfully"
