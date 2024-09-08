@@ -51,15 +51,15 @@ jobs:
           ERROR_LOG_FILE=black-output.log
           TEST_LOG_FILE=pytest-output.log
 
-          # Create temporary files to store escaped logs
-          ESCAPED_LOG_FILE=$(mktemp)
-          ESCAPED_ERROR_LOG_FILE=$(mktemp)
-          ESCAPED_TEST_LOG_FILE=$(mktemp)
+          # Create temporary files to store URL-encoded logs
+          ENCODED_LOG_FILE=$(mktemp)
+          ENCODED_ERROR_LOG_FILE=$(mktemp)
+          ENCODED_TEST_LOG_FILE=$(mktemp)
 
-          # Escape log content for JSON
-          python -c "import json, sys; sys.stdout.write(json.dumps(open('$LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_LOG_FILE
-          python -c "import json, sys; sys.stdout.write(json.dumps(open('$ERROR_LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_ERROR_LOG_FILE
-          python -c "import json, sys; sys.stdout.write(json.dumps(open('$TEST_LOG_FILE').read().replace('\n', '\\n')))" > $ESCAPED_TEST_LOG_FILE
+          # URL-encode log content
+          python -c "import urllib.parse; import sys; print(urllib.parse.quote(open('$LOG_FILE').read()))" > $ENCODED_LOG_FILE
+          python -c "import urllib.parse; import sys; print(urllib.parse.quote(open('$ERROR_LOG_FILE').read()))" > $ENCODED_ERROR_LOG_FILE
+          python -c "import urllib.parse; import sys; print(urllib.parse.quote(open('$TEST_LOG_FILE').read()))" > $ENCODED_TEST_LOG_FILE
 
           # Capture CI job log status
           CI_STATUS="INFO: CI job completed successfully"
@@ -83,12 +83,12 @@ jobs:
               {
                 "stream": { "job": "ci-cd-pipeline", "level": "ERROR" },
                 "values": [
-                  ["'"$TIMESTAMP"'", "'"$(cat $ESCAPED_LOG_FILE) $(cat $ESCAPED_ERROR_LOG_FILE) $(cat $ESCAPED_TEST_LOG_FILE)"'"]
+                  ["'"$TIMESTAMP"'", "'"$(cat $ENCODED_LOG_FILE) $(cat $ENCODED_ERROR_LOG_FILE) $(cat $ENCODED_TEST_LOG_FILE)"'"]
                 ]
               }
             ]
           }'
 
           # Clean up temporary files
-          rm $ESCAPED_LOG_FILE $ESCAPED_ERROR_LOG_FILE $ESCAPED_TEST_LOG_FILE
+          rm $ENCODED_LOG_FILE $ENCODED_ERROR_LOG_FILE $ENCODED_TEST_LOG_FILE
 
