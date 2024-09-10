@@ -32,7 +32,7 @@ jobs:
           pip install black flake8
 
       - name: Run install.py for database setup
-        run: python install.py  # Run this to initialize the database
+        run: python install.py --ci  # Run this in CI mode to initialize the database
 
       - name: Run flake8
         run: flake8 src/ tests/ | tee flake8-output.log
