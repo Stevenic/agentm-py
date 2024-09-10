@@ -14,3 +14,6 @@ urllib3==2.2.2
 virtualenv==20.26.3
 black
 flake8
+tiktoken
+anyio
+trio
