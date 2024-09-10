@@ -1,5 +1,6 @@
 import asyncio
 
+
 class Semaphore:
     def __init__(self, max_concurrent_tasks):
         self.semaphore = asyncio.Semaphore(max_concurrent_tasks)

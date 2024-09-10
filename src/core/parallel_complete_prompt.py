@@ -1,8 +1,11 @@
 import asyncio
 from .concurrency import Semaphore
 
+
 class ParallelCompletePrompt:
-    def __init__(self, complete_prompt_func, parallel_completions=1, should_continue_func=None):
+    def __init__(
+        self, complete_prompt_func, parallel_completions=1, should_continue_func=None
+    ):
         self.complete_prompt_func = complete_prompt_func
         self.parallel_completions = parallel_completions
         self.should_continue_func = should_continue_func or (lambda: True)
