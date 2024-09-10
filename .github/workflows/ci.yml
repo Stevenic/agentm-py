@@ -31,6 +31,9 @@ jobs:
           pip install -r requirements.txt
           pip install black flake8
 
+      - name: Run install.py for database setup
+        run: python install.py  # Run this to initialize the database
+
       - name: Run flake8
         run: flake8 src/ tests/ | tee flake8-output.log
 
@@ -91,4 +94,3 @@ jobs:
 
           # Clean up temporary files
           rm $ENCODED_LOG_FILE $ENCODED_ERROR_LOG_FILE $ENCODED_TEST_LOG_FILE
-
