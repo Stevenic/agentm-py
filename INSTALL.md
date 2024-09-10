@@ -63,9 +63,18 @@ agentm-py/
 │   ├── token_counter.py
 │   ├── concurrency.py
 │   ├── prompt_generation.py
+│   ├── parallel_complete_prompt.py
+│   ├── log_complete_prompt.py
+│   ├── compose_prompt.py
 │   └── __init__.py
 ├── tests/
-│   └── test_example.py
+│   ├── test_openai_api.py
+│   ├── test_token_counter.py
+│   ├── test_prompt_generation.py
+│   ├── test_parallel_complete_prompt.py
+│   ├── test_compose_prompt.py
+│   ├── test_log_complete_prompt.py
+│   └── test_database.py
 ├── src/
 │   └── __init__.py
 ├── docs/
@@ -98,6 +107,9 @@ agentm-py/
 │   ├── token_counter.py
 │   ├── concurrency.py
 │   ├── prompt_generation.py
+│   ├── parallel_complete_prompt.py
+│   ├── log_complete_prompt.py
+│   ├── compose_prompt.py
 │   └── __init__.py
 ├── var/
 │   ├── data/
@@ -105,7 +117,13 @@ agentm-py/
 │   └── logs/
 │       └── error.log
 ├── tests/
-│   └── test_example.py
+│   ├── test_openai_api.py
+│   ├── test_token_counter.py
+│   ├── test_prompt_generation.py
+│   ├── test_parallel_complete_prompt.py
+│   ├── test_compose_prompt.py
+│   ├── test_log_complete_prompt.py
+│   └── test_database.py
 ├── src/
 │   └── __init__.py
 ├── docs/
