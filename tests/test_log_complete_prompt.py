@@ -3,7 +3,7 @@ import shutil
 import os
 from core.log_complete_prompt import LogCompletePrompt
 
-@pytest.mark.asyncio
+@pytest.mark.anyio
 async def test_logging():
     # Ensure the config folder exists in the test environment
     if not os.path.exists('../config'):
