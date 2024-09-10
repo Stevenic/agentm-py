@@ -1,0 +1,16 @@
+certifi==2024.8.30
+charset-normalizer==3.3.2
+distlib==0.3.8
+filelock==3.15.4
+idna==3.8
+iniconfig==2.0.0
+packaging==24.1
+pipenv==2024.0.1
+platformdirs==4.2.2
+pluggy==1.5.0
+pytest==8.3.2
+requests==2.32.3
+urllib3==2.2.2
+virtualenv==20.26.3
+black
+flake8
