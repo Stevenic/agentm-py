@@ -10,4 +10,4 @@ async def test_parallel_completion():
     parallel_prompt = ParallelCompletePrompt(mock_complete_prompt)
     result = await parallel_prompt.complete_prompt()
 
-    assert result["completed"] == True
+    assert result["completed"] is True

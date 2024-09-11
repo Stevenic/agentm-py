@@ -1,4 +1,3 @@
-import pytest
 from core.prompt_generation import PromptGenerator
 
 

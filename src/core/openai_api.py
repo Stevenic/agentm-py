@@ -1,7 +1,5 @@
 import openai
 import json
-import sqlite3
-from datetime import datetime
 from .token_counter import TokenCounter
 from .database import Database
 
