@@ -18,3 +18,4 @@ tiktoken
 anyio
 trio
 openai
+jsonschema
