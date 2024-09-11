@@ -23,4 +23,4 @@ async def test_logging():
     result = await log_prompt.complete_prompt()
 
     # Assert the completion result
-    assert result["completed"] == True
+    assert result["completed"] is True

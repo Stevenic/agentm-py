@@ -1,4 +1,3 @@
-import pytest
 from core.token_counter import TokenCounter
 
 

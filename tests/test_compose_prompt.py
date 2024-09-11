@@ -1,4 +1,3 @@
-import pytest
 from core.compose_prompt import compose_prompt
 
 
