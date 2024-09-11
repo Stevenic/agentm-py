@@ -17,3 +17,5 @@ flake8
 tiktoken
 anyio
 trio
+openai
+jsonschema
