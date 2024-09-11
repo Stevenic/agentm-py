@@ -9,15 +9,18 @@ def create_settings(ci_mode=False):
         # Use default values for CI
         api_key = "sk-test-key"
         log_path = './var/logs/error.log'
+        debug = False
     else:
         # Prompt user for settings
         api_key = input('Enter your OpenAI API key: ')
         log_path = input('Enter the log directory path [default: ./var/logs/error.log]: ') or './var/logs/error.log'
+        debug = input('Enable debug mode? [y/n]: ').lower() == 'y'
 
     # Save settings to JSON file
     settings = {
         'openai_api_key': api_key,
-        'log_path': log_path
+        'log_path': log_path,
+        'debug': debug
     }
     os.makedirs('./config', exist_ok=True)
     with open('./config/settings.json', 'w') as f:
