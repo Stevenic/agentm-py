@@ -2,7 +2,7 @@
 
 AgentM is a library of "Micro Agents" that make it easy to add reliable intelligence to any application. The philosophy behind AgentM is that "Agents" should be mostly comprised of deterministic code with a sprinkle of LLM-powered intelligence mixed in. Many of the existing Agent frameworks place the LLM at the center of the application as an orchestrator that calls a collection of tools. In an AgentM application, your code is the orchestrator, and you only call a micro agent when you need to perform a task that requires intelligence.
 
-The initial draft of AgentM was written in JavaScript, but a Python version is available.
+Check out the [JavaScript version](https://github.com/Stevenic/agentm-js) to get a sense of AgentM's current feature set.
 
 ## Installation
 
@@ -69,4 +69,36 @@ Compare Orange and Grape and return the items in the correct order as 'item1,ite
 Grape,Orange
 Original list: ['Apple', 'Orange', 'Banana', 'Grape', 'Pineapple']
 Sorted list: ['Apple', 'Banana', 'Orange', 'Grape', 'Pineapple']
+```
+
+### Example 3: Chain of Thought
+
+Run the **chain of thought** example to see how AgentM solves problems using a step-by-step reasoning approach:
+
+```bash
+python examples/chain_of_thought_example.py
+```
+
+#### Sample Output:
+```bash
+Question: What is the square root of 144?
+Chain of Thought Reasoning: To find the square root of 144 step-by-step, follow these steps:
+
+1. **Understanding Square Roots**: The square root of a number is a value that, when multiplied by itself, gives that number. For example, if x is the square root of y, then x * x = y.
+
+2. **Identifying the Number**: In this case, we need to find the square root of 144.
+
+3. **Finding Factors**: We'll look for a number that, when multiplied by itself, equals 144. 
+
+4. **Testing Numbers**: 
+   - Let's start with smaller numbers:
+     - 12 * 12 = 144 (this is the answer)
+   
+5. **Conclusion**: The square root of 144 is 12.
+
+Thus, the final answer is:
+
+\[
+\sqrt{144} = 12
+\]
 ```
