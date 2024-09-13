@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>cs.AI updates on arXiv.org</title>
+    <link>http://rss.arxiv.org/rss/cs.AI</link>
+    <description>cs.AI updates on the arXiv.org e-print archive.</description>
+    <atom:link href="http://rss.arxiv.org/rss/cs.AI" rel="self" type="application/rss+xml"/>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Sep 2024 04:00:05 +0000</lastBuildDate>
+    <managingEditor>rss-help@arxiv.org</managingEditor>
+    <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+    <skipDays>
+      <day>Sunday</day>
+      <day>Saturday</day>
+    </skipDays>
+    <item>
+      <title>Beyond Preferences in AI Alignment</title>
+      <link>https://arxiv.org/abs/2408.16984</link>
+      <description>arXiv:2408.16984v1 Announce Type: new 
+Abstract: The dominant practice of AI alignment assumes (1) that preferences are an adequate representation of human values, (2) that human rationality can be understood in terms of maximizing the satisfaction of preferences, and (3) that AI systems should be aligned with the preferences of one or more humans to ensure that they behave safely and in accordance with our values. Whether implicitly followed or explicitly endorsed, these commitments constitute what we term a preferentist approach to AI alignment. In this paper, we characterize and challenge the preferentist approach, describing conceptual and technical alternatives that are ripe for further research. We first survey the limits of rational choice theory as a descriptive model, explaining how preferences fail to capture the thick semantic content of human values, and how utility representations neglect the possible incommensurability of those values. We then critique the normativity of expected utility theory (EUT) for humans and AI, drawing upon arguments showing how rational agents need not comply with EUT, while highlighting how EUT is silent on which preferences are normatively acceptable. Finally, we argue that these limitations motivate a reframing of the targets of AI alignment: Instead of alignment with the preferences of a human user, developer, or humanity-writ-large, AI systems should be aligned with normative standards appropriate to their social roles, such as the role of a general-purpose assistant. Furthermore, these standards should be negotiated and agreed upon by all relevant stakeholders. On this alternative conception of alignment, a multiplicity of AI systems will be able to serve diverse ends, aligned with normative standards that promote mutual benefit and limit harm despite our plural and divergent values.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16984v1</guid>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Tan Zhi-Xuan, Micah Carroll, Matija Franklin, Hal Ashton</dc:creator>
+    </item>
+    <item>
+      <title>Strategic Arms with Side Communication Prevail Over Low-Regret MAB Algorithms</title>
+      <link>https://arxiv.org/abs/2408.17101</link>
+      <description>arXiv:2408.17101v1 Announce Type: new 
+Abstract: In the strategic multi-armed bandit setting, when arms possess perfect information about the player's behavior, they can establish an equilibrium where: 1. they retain almost all of their value, 2. they leave the player with a substantial (linear) regret. This study illustrates that, even if complete information is not publicly available to all arms but is shared among them, it is possible to achieve a similar equilibrium. The primary challenge lies in designing a communication protocol that incentivizes the arms to communicate truthfully.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17101v1</guid>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <arxiv:DOI>10.1109/ICASSP48485.2024.10446895</arxiv:DOI>
+      <arxiv:journal_reference>ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024, pp.7435-7439</arxiv:journal_reference>
+      <dc:creator>Ahmed Ben Yahmed (CREST, ENSAE Paris), Cl\'ement Calauz\`enes (CREST, ENSAE Paris), Vianney Perchet (CREST, ENSAE Paris)</dc:creator>
+    </item>
+    <item>
+      <title>Identifying and Clustering Counter Relationships of Team Compositions in PvP Games for Efficient Balance Analysis</title>
+      <link>https://arxiv.org/abs/2408.17180</link>
+      <description>arXiv:2408.17180v1 Announce Type: new 
+Abstract: How can balance be quantified in game settings? This question is crucial for game designers, especially in player-versus-player (PvP) games, where analyzing the strength relations among predefined team compositions-such as hero combinations in multiplayer online battle arena (MOBA) games or decks in card games-is essential for enhancing gameplay and achieving balance. We have developed two advanced measures that extend beyond the simplistic win rate to quantify balance in zero-sum competitive scenarios. These measures are derived from win value estimations, which employ strength rating approximations via the Bradley-Terry model and counter relationship approximations via vector quantization, significantly reducing the computational complexity associated with traditional win value estimations. Throughout the learning process of these models, we identify useful categories of compositions and pinpoint their counter relationships, aligning with the experiences of human players without requiring specific game knowledge. Our methodology hinges on a simple technique to enhance codebook utilization in discrete representation with a deterministic vector quantization process for an extremely small state space. Our framework has been validated in popular online games, including Age of Empires II, Hearthstone, Brawl Stars, and League of Legends. The accuracy of the observed strength relations in these games is comparable to traditional pairwise win value predictions, while also offering a more manageable complexity for analysis. Ultimately, our findings contribute to a deeper understanding of PvP game dynamics and present a methodology that significantly improves game balance evaluation and design.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17180v1</guid>
+      <category>cs.AI</category>
+      <category>cs.GT</category>
+      <category>cs.IR</category>
+      <category>cs.LG</category>
+      <category>cs.MA</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Chiu-Chou Lin, Yu-Wei Shih, Kuei-Ting Kuo, Yu-Cheng Chen, Chien-Hua Chen, Wei-Chen Chiu, I-Chen Wu</dc:creator>
+    </item>
+    <item>
+      <title>Reasoning with maximal consistent signatures</title>
+      <link>https://arxiv.org/abs/2408.17190</link>
+      <description>arXiv:2408.17190v1 Announce Type: new 
+Abstract: We analyse a specific instance of the general approach of reasoning based on forgetting by Lang and Marquis. More precisely, we discuss an approach for reasoning with inconsistent information using maximal consistent subsignatures, where a maximal consistent subsignature is a maximal set of propositions such that forgetting the remaining propositions restores consistency. We analyse maximal consistent subsignatures and the corresponding minimal inconsistent subsignatures in-depth and show, among others, that the hitting set duality applies for them as well. We further analyse inference relations based on maximal consistent subsignatures wrt. rationality postulates from non-monotonic reasoning and computational complexity. We also consider the relationship of our approach with inconsistency measurement and paraconsistent reasoning.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17190v1</guid>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-nc-sa/4.0/</dc:rights>
+      <dc:creator>Matthias Thimm, Jandson Santos Ribeiro Santos</dc:creator>
+    </item>
+    <item>
+      <title>Towards Symbolic XAI -- Explanation Through Human Understandable Logical Relationships Between Features</title>
+      <link>https://arxiv.org/abs/2408.17198</link>
+      <description>arXiv:2408.17198v1 Announce Type: new 
+Abstract: Explainable Artificial Intelligence (XAI) plays a crucial role in fostering transparency and trust in AI systems, where traditional XAI approaches typically offer one level of abstraction for explanations, often in the form of heatmaps highlighting single or multiple input features. However, we ask whether abstract reasoning or problem-solving strategies of a model may also be relevant, as these align more closely with how humans approach solutions to problems. We propose a framework, called Symbolic XAI, that attributes relevance to symbolic queries expressing logical relationships between input features, thereby capturing the abstract reasoning behind a model's predictions. The methodology is built upon a simple yet general multi-order decomposition of model predictions. This decomposition can be specified using higher-order propagation-based relevance methods, such as GNN-LRP, or perturbation-based explanation methods commonly used in XAI. The effectiveness of our framework is demonstrated in the domains of natural language processing (NLP), vision, and quantum chemistry (QC), where abstract symbolic domain knowledge is abundant and of significant interest to users. The Symbolic XAI framework provides an understanding of the model's decision-making process that is both flexible for customization by the user and human-readable through logical formulas.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17198v1</guid>
+      <category>cs.AI</category>
+      <category>cs.LG</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Thomas Schnake, Farnoush Rezaei Jafaria, Jonas Lederer, Ping Xiong, Shinichi Nakajima, Stefan Gugler, Gr\'egoire Montavon, Klaus-Robert M\"uller</dc:creator>
+    </item>
+    <item>
+      <title>A methodological framework for Resilience as a Service (RaaS) in multimodal urban transportation networks</title>
+      <link>https://arxiv.org/abs/2408.17233</link>
+      <description>arXiv:2408.17233v1 Announce Type: new 
+Abstract: Public transportation systems are experiencing an increase in commuter traffic. This increase underscores the need for resilience strategies to manage unexpected service disruptions, ensuring rapid and effective responses that minimize adverse effects on stakeholders and enhance the system's ability to maintain essential functions and recover quickly. This study aims to explore the management of public transport disruptions through resilience as a service (RaaS) strategies, developing an optimization model to effectively allocate resources and minimize the cost for operators and passengers. The proposed model includes multiple transportation options, such as buses, taxis, and automated vans, and evaluates them as bridging alternatives to rail-disrupted services based on factors such as their availability, capacity, speed, and proximity to the disrupted station. This ensures that the most suitable vehicles are deployed to maintain service continuity. Applied to a case study in the Ile de France region, Paris and suburbs, complemented by a microscopic simulation, the model is compared to existing solutions such as bus bridging and reserve fleets. The results highlight the model's performance in minimizing costs and enhancing stakeholder satisfaction, optimizing transport management during disruptions.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17233v1</guid>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-nc-nd/4.0/</dc:rights>
+      <dc:creator>Sara Jaber (Univ. Gustave Eiffel, COSYS, GRETTIA, Paris, France,VEDECOM, mobiLAB, Department of new solutions of mobility services,shared energy, Versailles, France), Mostafa Ameli (Univ. Gustave Eiffel, COSYS, GRETTIA, Paris, France), S. M. Hassan Mahdavi (VEDECOM, mobiLAB, Department of new solutions of mobility services,shared energy, Versailles, France), Neila Bhouri (Univ. Gustave Eiffel, COSYS, GRETTIA, Paris, France)</dc:creator>
+    </item>
+    <item>
+      <title>Flexible and Effective Mixing of Large Language Models into a Mixture of Domain Experts</title>
+      <link>https://arxiv.org/abs/2408.17280</link>
+      <description>arXiv:2408.17280v1 Announce Type: new 
+Abstract: We present a toolkit for creating low-cost Mixture-of-Domain-Experts (MOE) from trained models. The toolkit can be used for creating a mixture from models or from adapters. We perform extensive tests and offer guidance on defining the architecture of the resulting MOE using the toolkit. A public repository is available.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17280v1</guid>
+      <category>cs.AI</category>
+      <category>cs.CL</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-sa/4.0/</dc:rights>
+      <dc:creator>Rhui Dih Lee, Laura Wynter, Raghu Kiran Ganti</dc:creator>
+    </item>
+    <item>
+      <title>Bridging Domain Knowledge and Process Discovery Using Large Language Models</title>
+      <link>https://arxiv.org/abs/2408.17316</link>
+      <description>arXiv:2408.17316v1 Announce Type: new 
+Abstract: Discovering good process models is essential for different process analysis tasks such as conformance checking and process improvements. Automated process discovery methods often overlook valuable domain knowledge. This knowledge, including insights from domain experts and detailed process documentation, remains largely untapped during process discovery. This paper leverages Large Language Models (LLMs) to integrate such knowledge directly into process discovery. We use rules derived from LLMs to guide model construction, ensuring alignment with both domain knowledge and actual process executions. By integrating LLMs, we create a bridge between process knowledge expressed in natural language and the discovery of robust process models, advancing process discovery methodologies significantly. To showcase the usability of our framework, we conducted a case study with the UWV employee insurance agency, demonstrating its practical benefits and effectiveness.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17316v1</guid>
+      <category>cs.AI</category>
+      <category>cs.CL</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <dc:creator>Ali Norouzifar, Humam Kourani, Marcus Dees, Wil van der Aalst</dc:creator>
+    </item>
+    <item>
+      <title>Traffic expertise meets residual RL: Knowledge-informed model-based residual reinforcement learning for CAV trajectory control</title>
+      <link>https://arxiv.org/abs/2408.17380</link>
+      <description>arXiv:2408.17380v1 Announce Type: new 
+Abstract: Model-based reinforcement learning (RL) is anticipated to exhibit higher sample efficiency compared to model-free RL by utilizing a virtual environment model. However, it is challenging to obtain sufficiently accurate representations of the environmental dynamics due to uncertainties in complex systems and environments. An inaccurate environment model may degrade the sample efficiency and performance of model-based RL. Furthermore, while model-based RL can improve sample efficiency, it often still requires substantial training time to learn from scratch, potentially limiting its advantages over model-free approaches. To address these challenges, this paper introduces a knowledge-informed model-based residual reinforcement learning framework aimed at enhancing learning efficiency by infusing established expert knowledge into the learning process and avoiding the issue of beginning from zero. Our approach integrates traffic expert knowledge into a virtual environment model, employing the Intelligent Driver Model (IDM) for basic dynamics and neural networks for residual dynamics, thus ensuring adaptability to complex scenarios. We propose a novel strategy that combines traditional control methods with residual RL, facilitating efficient learning and policy optimization without the need to learn from scratch. The proposed approach is applied to CAV trajectory control tasks for the dissipation of stop-and-go waves in mixed traffic flow. Experimental results demonstrate that our proposed approach enables the CAV agent to achieve superior performance in trajectory control compared to the baseline agents in terms of sample efficiency, traffic flow smoothness and traffic mobility. The source code and supplementary materials are available at https://github.com/zihaosheng/traffic-expertise-RL/.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17380v1</guid>
+      <category>cs.AI</category>
+      <category>cs.LG</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Zihao Sheng, Zilin Huang, Sikai Chen</dc:creator>
+    </item>
+    <item>
+      <title>Exploring the Effect of Explanation Content and Format on User Comprehension and Trust</title>
+      <link>https://arxiv.org/abs/2408.17401</link>
+      <description>arXiv:2408.17401v1 Announce Type: new 
+Abstract: In recent years, various methods have been introduced for explaining the outputs of "black-box" AI models. However, it is not well understood whether users actually comprehend and trust these explanations. In this paper, we focus on explanations for a regression tool for assessing cancer risk and examine the effect of the explanations' content and format on the user-centric metrics of comprehension and trust. Regarding content, we experiment with two explanation methods: the popular SHAP, based on game-theoretic notions and thus potentially complex for everyday users to comprehend, and occlusion-1, based on feature occlusion which may be more comprehensible. Regarding format, we present SHAP explanations as charts (SC), as is conventional, and occlusion-1 explanations as charts (OC) as well as text (OT), to which their simpler nature also lends itself. The experiments amount to user studies questioning participants, with two different levels of expertise (the general population and those with some medical training), on their subjective and objective comprehension of and trust in explanations for the outputs of the regression tool. In both studies we found a clear preference in terms of subjective comprehension and trust for occlusion-1 over SHAP explanations in general, when comparing based on content. However, direct comparisons of explanations when controlling for format only revealed evidence for OT over SC explanations in most cases, suggesting that the dominance of occlusion-1 over SHAP explanations may be driven by a preference for text over charts as explanations. Finally, we found no evidence of a difference between the explanation types in terms of objective comprehension. Thus overall, the choice of the content and format of explanations needs careful attention, since in some contexts format, rather than content, may play the critical role in improving user experience.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.17401v1</guid>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>new</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <dc:creator>Antonio Rago, Bence Palfi, Purin Sukpanichnant, Hannibal Nabli, Kavyesh Vivek, Olga Kostopoulou, James Kinross, Francesca Toni</dc:creator>
+    </item>
+    <item>
+      <title>An Effective Information Theoretic Framework for Channel Pruning</title>
+      <link>https://arxiv.org/abs/2408.16772</link>
+      <description>arXiv:2408.16772v1 Announce Type: cross 
+Abstract: Channel pruning is a promising method for accelerating and compressing convolutional neural networks. However, current pruning algorithms still remain unsolved problems that how to assign layer-wise pruning ratios properly and discard the least important channels with a convincing criterion. In this paper, we present a novel channel pruning approach via information theory and interpretability of neural networks. Specifically, we regard information entropy as the expected amount of information for convolutional layers. In addition, if we suppose a matrix as a system of linear equations, a higher-rank matrix represents there exist more solutions to it, which indicates more uncertainty. From the point of view of information theory, the rank can also describe the amount of information. In a neural network, considering the rank and entropy as two information indicators of convolutional layers, we propose a fusion function to reach a compromise of them, where the fusion results are defined as ``information concentration''. When pre-defining layer-wise pruning ratios, we employ the information concentration as a reference instead of heuristic and engineering tuning to provide a more interpretable solution. Moreover, we leverage Shapley values, which are a potent tool in the interpretability of neural networks, to evaluate the channel contributions and discard the least important channels for model compression while maintaining its performance. Extensive experiments demonstrate the effectiveness and promising performance of our method. For example, our method improves the accuracy by 0.21% when reducing 45.5% FLOPs and removing 40.3% parameters for ResNet-56 on CIFAR-10. Moreover, our method obtains loss in Top-1/Top-5 accuracies of 0.43%/0.11% by reducing 41.6% FLOPs and removing 35.0% parameters for ResNet-50 on ImageNet.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16772v1</guid>
+      <category>cs.IT</category>
+      <category>cs.AI</category>
+      <category>cs.LG</category>
+      <category>math.IT</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <arxiv:DOI>10.1109/TNNLS.2024.3365194</arxiv:DOI>
+      <dc:creator>Yihao Chen, Zefang Wang</dc:creator>
+    </item>
+    <item>
+      <title>Online Behavior Modification for Expressive User Control of RL-Trained Robots</title>
+      <link>https://arxiv.org/abs/2408.16776</link>
+      <description>arXiv:2408.16776v1 Announce Type: cross 
+Abstract: Reinforcement Learning (RL) is an effective method for robots to learn tasks. However, in typical RL, end-users have little to no control over how the robot does the task after the robot has been deployed. To address this, we introduce the idea of online behavior modification, a paradigm in which users have control over behavior features of a robot in real time as it autonomously completes a task using an RL-trained policy. To show the value of this user-centered formulation for human-robot interaction, we present a behavior diversity based algorithm, Adjustable Control Of RL Dynamics (ACORD), and demonstrate its applicability to online behavior modification in simulation and a user study. In the study (n=23) users adjust the style of paintings as a robot traces a shape autonomously. We compare ACORD to RL and Shared Autonomy (SA), and show ACORD affords user-preferred levels of control and expression, comparable to SA, but with the potential for autonomous execution and robustness of RL.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16776v1</guid>
+      <category>cs.RO</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-nc-nd/4.0/</dc:rights>
+      <arxiv:DOI>10.1145/3610977.3634947</arxiv:DOI>
+      <dc:creator>Isaac Sheidlower, Mavis Murdock, Emma Bethel, Reuben M. Aronson, Elaine Schaertl Short</dc:creator>
+    </item>
+    <item>
+      <title>Inductive Learning of Logical Theories with LLMs: A Complexity-graded Analysis</title>
+      <link>https://arxiv.org/abs/2408.16779</link>
+      <description>arXiv:2408.16779v1 Announce Type: cross 
+Abstract: This work presents a novel systematic methodology to analyse the capabilities and limitations of Large Language Models (LLMs) with feedback from a formal inference engine, on logic theory induction. The analysis is complexity-graded w.r.t. rule dependency structure, allowing quantification of specific inference challenges on LLM performance. Integrating LLMs with formal methods is a promising frontier in the Natural Language Processing field, as an important avenue for improving model inference control and explainability. In particular, inductive learning over complex sets of facts and rules, poses unique challenges for current autoregressive models, as they lack explicit symbolic grounding. While they can be complemented by formal systems, the properties delivered by LLMs regarding inductive learning, are not well understood and quantified. Empirical results indicate that the largest LLMs can achieve competitive results against a SOTA Inductive Logic Programming (ILP) system baseline, but also that tracking long predicate relationship chains is a more difficult obstacle than theory complexity for the LLMs.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16779v1</guid>
+      <category>cs.CL</category>
+      <category>cs.AI</category>
+      <category>cs.LO</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-nc-sa/4.0/</dc:rights>
+      <dc:creator>Jo\~ao Pedro Gandarela, Danilo S. Carvalho, Andr\'e Freitas</dc:creator>
+    </item>
+    <item>
+      <title>$EvoAl^{2048}$</title>
+      <link>https://arxiv.org/abs/2408.16780</link>
+      <description>arXiv:2408.16780v1 Announce Type: cross 
+Abstract: As AI solutions enter safety-critical products, the explainability and interpretability of solutions generated by AI products become increasingly important. In the long term, such explanations are the key to gaining users' acceptance of AI-based systems' decisions. We report on applying a model-driven-based optimisation to search for an interpretable and explainable policy that solves the game 2048. This paper describes a solution to the GECCO'24 Interpretable Control Competition using the open-source software EvoAl. We aimed to develop an approach for creating interpretable policies that are easy to adapt to new ideas.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16780v1</guid>
+      <category>cs.NE</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-sa/4.0/</dc:rights>
+      <dc:creator>Bernhard J. Berger (University of Rostock, Software Engineering Chair Rostock, Germany, Hamburg University of Technology, Institute of Embedded Systems, Germany), Christina Plump (DFKI - Cyber-Physical Systems Bremen, Germany), Rolf Drechsler (University of Bremen, Departments of Mathematics and Computer Science, DFKI - Cyber-Physical Systems Bremen, Germany)</dc:creator>
+    </item>
+    <item>
+      <title>Uncertainty-aware segmentation for rainfall prediction post processing</title>
+      <link>https://arxiv.org/abs/2408.16792</link>
+      <description>arXiv:2408.16792v1 Announce Type: cross 
+Abstract: Accurate precipitation forecasts are crucial for applications such as flood management, agricultural planning, water resource allocation, and weather warnings. Despite advances in numerical weather prediction (NWP) models, they still exhibit significant biases and uncertainties, especially at high spatial and temporal resolutions. To address these limitations, we explore uncertainty-aware deep learning models for post-processing daily cumulative quantitative precipitation forecasts to obtain forecast uncertainties that lead to a better trade-off between accuracy and reliability. Our study compares different state-of-the-art models, and we propose a variant of the well-known SDE-Net, called SDE U-Net, tailored to segmentation problems like ours. We evaluate its performance for both typical and intense precipitation events.
+  Our results show that all deep learning models significantly outperform the average baseline NWP solution, with our implementation of the SDE U-Net showing the best trade-off between accuracy and reliability. Integrating these models, which account for uncertainty, into operational forecasting systems can improve decision-making and preparedness for weather-related events.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16792v1</guid>
+      <category>physics.ao-ph</category>
+      <category>cs.AI</category>
+      <category>cs.LG</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <dc:creator>Simone Monaco, Luca Monaco, Daniele Apiletti</dc:creator>
+    </item>
+    <item>
+      <title>Generative AI in Ship Design</title>
+      <link>https://arxiv.org/abs/2408.16798</link>
+      <description>arXiv:2408.16798v1 Announce Type: cross 
+Abstract: The process of ship design is intricate, heavily influenced by the hull form which accounts for approximately 70% of the total cost. Traditional methods rely on human-driven iterative processes based on naval architecture principles and engineering analysis. In contrast, generative AI presents a novel approach, utilizing computational algorithms rooted in machine learning and artificial intelligence to optimize ship hull design. This report outlines the systematic creation of a generative AI for this purpose, involving steps such as dataset collection, model architecture selection, training, and validation. Utilizing the "SHIP-D" dataset, consisting of 30,000 hull forms, the report adopts the Gaussian Mixture Model (GMM) as the generative model architecture. GMMs offer a statistical framework to analyze data distribution, crucial for generating innovative ship designs efficiently. Overall, this approach holds promise in revolutionizing ship design by exploring a broader design space and integrating multidisciplinary optimization objectives effectively.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16798v1</guid>
+      <category>cs.LG</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Sahil Thakur, Navneet V Saxena, Prof Sitikantha Roy</dc:creator>
+    </item>
+    <item>
+      <title>HLogformer: A Hierarchical Transformer for Representing Log Data</title>
+      <link>https://arxiv.org/abs/2408.16803</link>
+      <description>arXiv:2408.16803v1 Announce Type: cross 
+Abstract: Transformers have gained widespread acclaim for their versatility in handling diverse data structures, yet their application to log data remains underexplored. Log data, characterized by its hierarchical, dictionary-like structure, poses unique challenges when processed using conventional transformer models. Traditional methods often rely on manually crafted templates for parsing logs, a process that is labor-intensive and lacks generalizability. Additionally, the linear treatment of log sequences by standard transformers neglects the rich, nested relationships within log entries, leading to suboptimal representations and excessive memory usage.
+  To address these issues, we introduce HLogformer, a novel hierarchical transformer framework specifically designed for log data. HLogformer leverages the hierarchical structure of log entries to significantly reduce memory costs and enhance representation learning. Unlike traditional models that treat log data as flat sequences, our framework processes log entries in a manner that respects their inherent hierarchical organization. This approach ensures comprehensive encoding of both fine-grained details and broader contextual relationships.
+  Our contributions are threefold: First, HLogformer is the first framework to design a dynamic hierarchical transformer tailored for dictionary-like log data. Second, it dramatically reduces memory costs associated with processing extensive log sequences. Third, comprehensive experiments demonstrate that HLogformer more effectively encodes hierarchical contextual information, proving to be highly effective for downstream tasks such as synthetic anomaly detection and product recommendation.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16803v1</guid>
+      <category>cs.LG</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Zhichao Hou, Mina Ghashami, Mikhail Kuznetsov, MohamadAli Torkamani</dc:creator>
+    </item>
+    <item>
+      <title>Physics-Informed Neural Networks and Extensions</title>
+      <link>https://arxiv.org/abs/2408.16806</link>
+      <description>arXiv:2408.16806v1 Announce Type: cross 
+Abstract: In this paper, we review the new method Physics-Informed Neural Networks (PINNs) that has become the main pillar in scientific machine learning, we present recent practical extensions, and provide a specific example in data-driven discovery of governing differential equations.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16806v1</guid>
+      <category>cs.LG</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <dc:creator>Maziar Raissi, Paris Perdikaris, Nazanin Ahmadi, George Em Karniadakis</dc:creator>
+    </item>
+    <item>
+      <title>GSTAM: Efficient Graph Distillation with Structural Attention-Matching</title>
+      <link>https://arxiv.org/abs/2408.16871</link>
+      <description>arXiv:2408.16871v1 Announce Type: cross 
+Abstract: Graph distillation has emerged as a solution for reducing large graph datasets to smaller, more manageable, and informative ones. Existing methods primarily target node classification, involve computationally intensive processes, and fail to capture the true distribution of the full graph dataset. To address these issues, we introduce Graph Distillation with Structural Attention Matching (GSTAM), a novel method for condensing graph classification datasets. GSTAM leverages the attention maps of GNNs to distill structural information from the original dataset into synthetic graphs. The structural attention-matching mechanism exploits the areas of the input graph that GNNs prioritize for classification, effectively distilling such information into the synthetic graphs and improving overall distillation performance. Comprehensive experiments demonstrate GSTAM's superiority over existing methods, achieving 0.45% to 6.5% better performance in extreme condensation ratios, highlighting its potential use in advancing distillation for graph classification tasks (Code available at https://github.com/arashrasti96/GSTAM).</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16871v1</guid>
+      <category>cs.LG</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-nc-sa/4.0/</dc:rights>
+      <dc:creator>Arash Rasti-Meymandi, Ahmad Sajedi, Zhaopan Xu, Konstantinos N. Plataniotis</dc:creator>
+    </item>
+    <item>
+      <title>Analyzing Inference Privacy Risks Through Gradients in Machine Learning</title>
+      <link>https://arxiv.org/abs/2408.16913</link>
+      <description>arXiv:2408.16913v1 Announce Type: cross 
+Abstract: In distributed learning settings, models are iteratively updated with shared gradients computed from potentially sensitive user data. While previous work has studied various privacy risks of sharing gradients, our paper aims to provide a systematic approach to analyze private information leakage from gradients. We present a unified game-based framework that encompasses a broad range of attacks including attribute, property, distributional, and user disclosures. We investigate how different uncertainties of the adversary affect their inferential power via extensive experiments on five datasets across various data modalities. Our results demonstrate the inefficacy of solely relying on data aggregation to achieve privacy against inference attacks in distributed learning. We further evaluate five types of defenses, namely, gradient pruning, signed gradient descent, adversarial perturbations, variational information bottleneck, and differential privacy, under both static and adaptive adversary settings. We provide an information-theoretic view for analyzing the effectiveness of these defenses against inference from gradients. Finally, we introduce a method for auditing attribute inference privacy, improving the empirical estimation of worst-case privacy through crafting adversarial canary records.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16913v1</guid>
+      <category>cs.LG</category>
+      <category>cs.AI</category>
+      <category>cs.CR</category>
+      <category>stat.ML</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Zhuohang Li, Andrew Lowy, Jing Liu, Toshiaki Koike-Akino, Kieran Parsons, Bradley Malin, Ye Wang</dc:creator>
+    </item>
+    <item>
+      <title>ACE-2005-PT: Corpus for Event Extraction in Portuguese</title>
+      <link>https://arxiv.org/abs/2408.16928</link>
+      <description>arXiv:2408.16928v1 Announce Type: cross 
+Abstract: Event extraction is an NLP task that commonly involves identifying the central word (trigger) for an event and its associated arguments in text. ACE-2005 is widely recognised as the standard corpus in this field. While other corpora, like PropBank, primarily focus on annotating predicate-argument structure, ACE-2005 provides comprehensive information about the overall event structure and semantics. However, its limited language coverage restricts its usability. This paper introduces ACE-2005-PT, a corpus created by translating ACE-2005 into Portuguese, with European and Brazilian variants. To speed up the process of obtaining ACE-2005-PT, we rely on automatic translators. This, however, poses some challenges related to automatically identifying the correct alignments between multi-word annotations in the original text and in the corresponding translated sentence. To achieve this, we developed an alignment pipeline that incorporates several alignment techniques: lemmatization, fuzzy matching, synonym matching, multiple translations and a BERT-based word aligner. To measure the alignment effectiveness, a subset of annotations from the ACE-2005-PT corpus was manually aligned by a linguist expert. This subset was then compared against our pipeline results which achieved exact and relaxed match scores of 70.55\% and 87.55\% respectively. As a result, we successfully generated a Portuguese version of the ACE-2005 corpus, which has been accepted for publication by LDC.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16928v1</guid>
+      <category>cs.CL</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <arxiv:DOI>10.1145/3626772.3657872</arxiv:DOI>
+      <arxiv:journal_reference>SIGIR '24: Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval (2024)</arxiv:journal_reference>
+      <dc:creator>Lu\'is Filipe Cunha, Purifica\c{c}\~ao Silvano, Ricardo Campos, Al\'ipio Jorge</dc:creator>
+    </item>
+    <item>
+      <title>Event Extraction for Portuguese: A QA-driven Approach using ACE-2005</title>
+      <link>https://arxiv.org/abs/2408.16932</link>
+      <description>arXiv:2408.16932v1 Announce Type: cross 
+Abstract: Event extraction is an Information Retrieval task that commonly consists of identifying the central word for the event (trigger) and the event's arguments. This task has been extensively studied for English but lags behind for Portuguese, partly due to the lack of task-specific annotated corpora. This paper proposes a framework in which two separated BERT-based models were fine-tuned to identify and classify events in Portuguese documents. We decompose this task into two sub-tasks. Firstly, we use a token classification model to detect event triggers. To extract event arguments, we train a Question Answering model that queries the triggers about their corresponding event argument roles. Given the lack of event annotated corpora in Portuguese, we translated the original version of the ACE-2005 dataset (a reference in the field) into Portuguese, producing a new corpus for Portuguese event extraction. To accomplish this, we developed an automatic translation pipeline. Our framework obtains F1 marks of 64.4 for trigger classification and 46.7 for argument classification setting, thus a new state-of-the-art reference for these tasks in Portuguese.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16932v1</guid>
+      <category>cs.CL</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <arxiv:DOI>10.1007/9</arxiv:DOI>
+      <arxiv:journal_reference>Progress in Artificial Intelligence. EPIA 2023. Lecture Notes in Computer Science(), vol 14115. Springer, Cham</arxiv:journal_reference>
+      <dc:creator>Lu\'is Filipe Cunha, Ricardo Campos, Al\'ipio Jorge</dc:creator>
+    </item>
+    <item>
+      <title>A longitudinal sentiment analysis of Sinophobia during COVID-19 using large language models</title>
+      <link>https://arxiv.org/abs/2408.16942</link>
+      <description>arXiv:2408.16942v1 Announce Type: cross 
+Abstract: The COVID-19 pandemic has exacerbated xenophobia, particularly Sinophobia, leading to widespread discrimination against individuals of Chinese descent. Large language models (LLMs) are pre-trained deep learning models used for natural language processing (NLP) tasks. The ability of LLMs to understand and generate human-like text makes them particularly useful for analysing social media data to detect and evaluate sentiments. We present a sentiment analysis framework utilising LLMs for longitudinal sentiment analysis of the Sinophobic sentiments expressed in X (Twitter) during the COVID-19 pandemic. The results show a significant correlation between the spikes in Sinophobic tweets, Sinophobic sentiments and surges in COVID-19 cases, revealing that the evolution of the pandemic influenced public sentiment and the prevalence of Sinophobic discourse. Furthermore, the sentiment analysis revealed a predominant presence of negative sentiments, such as annoyance and denial, which underscores the impact of political narratives and misinformation shaping public opinion. The lack of empathetic sentiment which was present in previous studies related to COVID-19 highlights the way the political narratives in media viewed the pandemic and how it blamed the Chinese community. Our study highlights the importance of transparent communication in mitigating xenophobic sentiments during global crises.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16942v1</guid>
+      <category>cs.CL</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by/4.0/</dc:rights>
+      <dc:creator>Chen Wang, Rohitash Chandra</dc:creator>
+    </item>
+    <item>
+      <title>Different Victims, Same Layout: Email Visual Similarity Detection for Enhanced Email Protection</title>
+      <link>https://arxiv.org/abs/2408.16945</link>
+      <description>arXiv:2408.16945v1 Announce Type: cross 
+Abstract: In the pursuit of an effective spam detection system, the focus has often been on identifying known spam patterns either through rule-based detection systems or machine learning (ML) solutions. However, both systems are susceptible to evasion techniques and zero-day attacks that can be achieved at low cost. Therefore, an email that bypassed the defense system once can do it again in the following days, even though rules are updated or the ML models are retrained. The recurrence of failures to detect emails that exhibit layout similarities to previously undetected spam is concerning for customers and can erode their trust in a company. Our observations show that threat actors reuse email kits extensively and can bypass detection with little effort, for example, by making changes to the content of emails. In this work, we propose an email visual similarity detection approach, named Pisco, to improve the detection capabilities of an email threat defense system. We apply our proof of concept to some real-world samples received from different sources. Our results show that email kits are being reused extensively and visually similar emails are sent to our customers at various time intervals. Therefore, this method could be very helpful in situations where detection features that rely on contextual information and keywords are bypassed, an occurrence our observations show happens frequently.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16945v1</guid>
+      <category>cs.CR</category>
+      <category>cs.AI</category>
+      <category>cs.LG</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://creativecommons.org/licenses/by-nc-sa/4.0/</dc:rights>
+      <dc:creator>Sachin Shukla, Omid Mirzaei</dc:creator>
+    </item>
+    <item>
+      <title>Transient Fault Tolerant Semantic Segmentation for Autonomous Driving</title>
+      <link>https://arxiv.org/abs/2408.16952</link>
+      <description>arXiv:2408.16952v1 Announce Type: cross 
+Abstract: Deep learning models are crucial for autonomous vehicle perception, but their reliability is challenged by algorithmic limitations and hardware faults. We address the latter by examining fault-tolerance in semantic segmentation models. Using established hardware fault models, we evaluate existing hardening techniques both in terms of accuracy and uncertainty and introduce ReLUMax, a novel simple activation function designed to enhance resilience against transient faults. ReLUMax integrates seamlessly into existing architectures without time overhead. Our experiments demonstrate that ReLUMax effectively improves robustness, preserving performance and boosting prediction confidence, thus contributing to the development of reliable autonomous driving systems.</description>
+      <guid isPermaLink="false">oai:arXiv.org:2408.16952v1</guid>
+      <category>cs.CV</category>
+      <category>cs.AI</category>
+      <pubDate>Mon, 02 Sep 2024 00:00:00 -0400</pubDate>
+      <arxiv:announce_type>cross</arxiv:announce_type>
+      <dc:rights>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</dc:rights>
+      <dc:creator>Leonardo Iurada, Niccol\`o Cavagnero, Fernando Fernandes Dos Santos, Giuseppe Averta, Paolo Rech, Tatiana Tommasi</dc:creator>
+    </item>
+  </channel>
+</rss>
