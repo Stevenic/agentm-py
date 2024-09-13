@@ -72,6 +72,17 @@ Chain of Thought Reasoning: To find the square root of 144 step-by-step, follow 
 
 4. **Testing Numbers**: 
    - Let's start with smaller numbers:
+     - 1 * 1 = 1 (not the answer)
+     - 2 * 2 = 4 (not the answer)
+     - 3 * 3 = 9 (not the answer)
+     - 4 * 4 = 16 (not the answer)
+     - 5 * 5 = 25 (not the answer)
+     - 6 * 6 = 36 (not the answer)
+     - 7 * 7 = 49 (not the answer)
+     - 8 * 8 = 64 (not the answer)
+     - 9 * 9 = 81 (not the answer)
+     - 10 * 10 = 100 (not the answer)
+     - 11 * 11 = 121 (not the answer)
      - 12 * 12 = 144 (this is the answer)
    
 5. **Conclusion**: The square root of 144 is 12.
