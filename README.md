@@ -24,6 +24,8 @@ For more detailed information, please refer to the [INSTALL.md](INSTALL.md) file
 
 ## Examples
 
+You can find more detailed examples in our [Examples Documentation](docs/EXAMPLES.md).
+
 ### Example 1: Filter List
 
 Run the **filter list** example to see how AgentM filters a list of items based on whether they are considered healthy snacks:
