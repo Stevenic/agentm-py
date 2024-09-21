@@ -1,20 +1,24 @@
 import asyncio
-from core.filter_list_agent import FilterListAgent
+from core.filter_list_agent import FilterListAgent, FilterListInput
 
 async def run_filter_list_example():
-    goal = "Remove items that are unhealthy snacks."
-    items_to_filter = [
-        "Apple",
-        "Chocolate bar",
-        "Carrot",
-        "Chips",
-        "Orange"
-    ]
-
-    agent = FilterListAgent(goal=goal, items_to_filter=items_to_filter)
+    input_data = FilterListInput(
+        goal="Remove items that are unhealthy snacks.",
+        items_to_filter=[
+            "Apple",
+            "Chocolate bar",
+            "Carrot",
+            "Chips",
+            "Orange"
+        ],
+        max_tokens=500,
+        temperature=0.0
+    )
+    
+    agent = FilterListAgent(input_data)
     filtered_results = await agent.filter()
 
-    print("Original list:", items_to_filter)
+    print("Original list:", input_data.items_to_filter)
     print("Filtered results:")
     for result in filtered_results:
         print(result)

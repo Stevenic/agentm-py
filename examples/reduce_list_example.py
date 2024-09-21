@@ -1,13 +1,17 @@
 import asyncio
-from core.reduce_list_agent import ReduceListAgent
+from core.reduce_list_agent import ReduceListAgent, ReduceListInput
 
 async def run_reduce_list_example():
-    items_to_reduce = ['Banana', 'Apple', 'Carrot']
-    reduction_goal = 'Reduce these items to a single word representing their nutritional value'
-    agent = ReduceListAgent(list_to_reduce=items_to_reduce, reduction_goal=reduction_goal)
+    input_data = ReduceListInput(
+        list_to_reduce=["Apple", "Banana", "Carrot"],
+        reduction_goal="Reduce each item to its first letter.",
+        max_tokens=1000
+    )
+    
+    agent = ReduceListAgent(input_data)
     reduced_items = await agent.reduce_list()
 
-    print("Original list:", items_to_reduce)
+    print("Original list:", input_data.list_to_reduce)
     print("Reduced results:", reduced_items)
 
 if __name__ == "__main__":
