@@ -22,3 +22,4 @@ jsonschema
 sphinx
 sphinx-rtd-theme
 myst-parser
+pydantic
