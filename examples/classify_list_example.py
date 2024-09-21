@@ -1,14 +1,18 @@
 import asyncio
-from core.classify_list_agent import ClassifyListAgent
+from core.classify_list_agent import ClassifyListAgent, ClassifyListInput
 
 async def run_classify_list_example():
-    items_to_classify = ['Apple', 'Chocolate', 'Carrot']
-    classification_criteria = 'Classify each item as healthy or unhealthy snack'
-    agent = ClassifyListAgent(list_to_classify=items_to_classify, classification_criteria=classification_criteria)
-    classified_items = await agent.classify_list()
+    input_data = ClassifyListInput(
+        list_to_classify=["Apple", "Banana", "Carrot"],
+        classification_criteria="Classify each item as a fruit or vegetable.",
+        max_tokens=1000
+    )
+    
+    agent = ClassifyListAgent(input_data)
+    classifications = await agent.classify_list()
 
-    print("Original list:", items_to_classify)
-    print("Classified results:", classified_items)
+    print("Original list:", input_data.list_to_classify)
+    print("Classified results:", classifications)
 
 if __name__ == "__main__":
     asyncio.run(run_classify_list_example())
