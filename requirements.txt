@@ -19,3 +19,6 @@ anyio
 trio
 openai
 jsonschema
+sphinx
+sphinx-rtd-theme
+myst-parser
