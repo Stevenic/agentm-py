@@ -1,14 +1,14 @@
 from pydantic import BaseModel, Field
-import asyncio
+from .concurrency import map_concurrent
 from typing import List
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class MapListInput(BaseModel):
     list_to_map: List[str] = Field(..., description="The list of items to transform")
     transformation: str = Field(..., description="The transformation rule to apply to each item")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class MapListAgent:
+class MapListAgent(ClientOwner):
     """
     A class to apply a transformation to each item in a list using the OpenAI API.
 
@@ -23,7 +23,7 @@ class MapListAgent:
         apply_transformation(user_prompt): Applies the transformation to a single item.
     """
 
-    def __init__(self, data: MapListInput):
+    def __init__(self, data: MapListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the MapListAgent object.
 
@@ -34,7 +34,7 @@ class MapListAgent:
         self.list_to_map = data.list_to_map
         self.transformation = data.transformation
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def map_list(self) -> List[str]:
         """
@@ -46,9 +46,9 @@ class MapListAgent:
         tasks = []
         for index, item in enumerate(self.list_to_map):
             user_prompt = f"Transform '{item}' as per the following rule: {self.transformation}."
-            tasks.append(self.apply_transformation(user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(self.apply_transformation, tasks, self.openai_client.max_concurrency)
         return results
 
     async def apply_transformation(self, user_prompt: str) -> str:

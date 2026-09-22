@@ -1,55 +1,100 @@
-from openai import OpenAI, BadRequestError
-from .logging import Logger  # Use the logger abstraction
+import asyncio
 import os
 
+import json
+import jsonschema
+from openai import AsyncOpenAI, BadRequestError
+from .logging import Logger
+
+
 class OpenAIClient:
-    """
-    A client for interacting with the OpenAI API.
+    """Reusable async transport. Share one instance across agents in an event loop.
 
-    Attributes:
-        logger (Logger): An instance of Logger for logging API interactions and errors.
-        client (OpenAI): An instance of the OpenAI API client.
-
-    Methods:
-        complete_chat(messages, model, max_tokens): Sends a chat completion request to the OpenAI API.
+    Use ``async with OpenAIClient(...)`` to close its connection pool. Settings
+    remain compatible with the existing config file; keyword options override it.
     """
 
-    def __init__(self, settings_path=None):
-        """
-        Constructs the OpenAIClient object and initializes the API client.
-
-        Args:
-            settings_path (str): The path to the settings JSON file containing the API key.
-        """
+    def __init__(self, settings_path=None, *, api_key=None, base_url=None,
+                 model=None, max_concurrency=8, timeout=60.0, max_retries=2,
+                 reasoning_effort=None, token_limit_parameter="max_tokens"):
+        if isinstance(max_concurrency, bool) or not isinstance(max_concurrency, int) or max_concurrency < 1:
+            raise ValueError("max_concurrency must be a positive integer")
         if settings_path is None:
             settings_path = os.path.join(os.path.dirname(__file__), '../../config/settings.json')
+        self.logger = Logger(settings_path, allow_missing=True)
+        settings = self.logger.settings
+        self.model = model or settings.get('model', 'gpt-4o-mini')
+        if token_limit_parameter not in ("max_tokens", "max_completion_tokens"):
+            raise ValueError("Unsupported token limit parameter")
+        self.token_limit_parameter = token_limit_parameter
+        self.reasoning_effort = reasoning_effort
+        self.max_concurrency = max_concurrency
+        self._semaphore = asyncio.Semaphore(max_concurrency)
+        self.client = AsyncOpenAI(
+            api_key=api_key or os.environ.get('OPENAI_API_KEY') or settings.get('openai_api_key'),
+            base_url=base_url or settings.get('base_url'),
+            timeout=timeout,
+            max_retries=max_retries,
+        )
 
-        self.logger = Logger(settings_path)
-        settings = self.logger.load_settings(settings_path)
-        self.client = OpenAI(api_key=settings["openai_api_key"])
-
-    async def complete_chat(self, messages, model="gpt-4o-mini", max_tokens=1500):
-        """
-        Sends a chat completion request to the OpenAI API.
-
-        Args:
-            messages (list): A list of message dicts for the chat completion.
-            model (str): The model name to use for the completion.
-            max_tokens (int): The maximum number of tokens to generate.
-
-        Returns:
-            str: The generated content from the chat completion.
-        
-        Raises:
-            BadRequestError: If there is an issue with the request to the OpenAI API.
-        """
+    async def complete_chat(self, messages, model=None, max_tokens=1500, *,
+                            temperature=None, response_format=None):
+        options = {'model': model or self.model, 'messages': messages, self.token_limit_parameter: max_tokens}
+        if self.reasoning_effort is not None:
+            options['reasoning_effort'] = self.reasoning_effort
+        if temperature is not None:
+            options['temperature'] = temperature
+        if response_format is not None:
+            options['response_format'] = response_format
         try:
-            response = self.client.chat.completions.create(
-                model=model,
-                messages=messages,
-                max_tokens=max_tokens
-            )
-            return response.choices[0].message.content
-        except BadRequestError as e:
-            self.logger.error(f"Error with OpenAI API: {str(e)}")
+            async with self._semaphore:
+                response = await self.client.chat.completions.create(**options)
+            choice = response.choices[0]
+            if choice.message.refusal:
+                raise ValueError('Model refused the requested completion')
+            if choice.finish_reason != 'stop' or choice.message.content is None:
+                raise ValueError('Model did not return a complete text response')
+            return choice.message.content
+        except BadRequestError:
+            self.logger.error('Completion request was rejected by the provider')
             raise
+
+    async def complete_object(self, messages, schema, *, max_tokens=1500, temperature=None):
+        """Generate and validate an object using a provider-supported strict schema."""
+        jsonschema.Draft202012Validator.check_schema(schema)
+        response = await self.complete_chat(
+            messages, max_tokens=max_tokens, temperature=temperature,
+            response_format={'type': 'json_schema', 'json_schema': {
+                'name': 'agent_result', 'strict': True, 'schema': schema,
+            }},
+        )
+        result = json.loads(response)
+        jsonschema.Draft202012Validator(schema).validate(result)
+        return result
+
+    async def aclose(self):
+        await self.client.close()
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, *exc):
+        await self.aclose()
+
+
+class ClientOwner:
+    """Agent lifecycle; an injected client remains owned by its caller."""
+
+    def __init__(self, openai_client=None):
+        self._owns_client = openai_client is None
+        self.openai_client = openai_client if openai_client is not None else OpenAIClient()
+
+    async def aclose(self):
+        if self._owns_client:
+            await self.openai_client.aclose()
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, *exc):
+        await self.aclose()

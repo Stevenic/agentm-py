@@ -1,14 +1,14 @@
 from pydantic import BaseModel, Field
-import asyncio
+from .concurrency import map_concurrent
 from typing import List, Dict
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class ReduceListInput(BaseModel):
     list_to_reduce: List[str] = Field(..., description="The list of items to reduce")
     reduction_goal: str = Field(..., description="The goal for reducing the items")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class ReduceListAgent:
+class ReduceListAgent(ClientOwner):
     """
     A class to reduce items in a list based on a given goal using the OpenAI API.
 
@@ -23,7 +23,7 @@ class ReduceListAgent:
         reduce_item(user_prompt): Reduces a single item based on the reduction goal.
     """
 
-    def __init__(self, data: ReduceListInput):
+    def __init__(self, data: ReduceListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the ReduceListAgent object.
 
@@ -34,7 +34,7 @@ class ReduceListAgent:
         self.list_to_reduce = data.list_to_reduce
         self.reduction_goal = data.reduction_goal
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def reduce_list(self) -> List[Dict]:
         """
@@ -46,9 +46,9 @@ class ReduceListAgent:
         tasks = []
         for item in self.list_to_reduce:
             user_prompt = f"Reduce the item '{item}' to achieve the goal: {self.reduction_goal}."
-            tasks.append(self.reduce_item(user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(self.reduce_item, tasks, self.openai_client.max_concurrency)
         return results
 
     async def reduce_item(self, user_prompt: str) -> Dict:

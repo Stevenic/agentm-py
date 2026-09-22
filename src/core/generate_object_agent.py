@@ -1,13 +1,14 @@
 from pydantic import BaseModel, Field
-from typing import Dict
-from .openai_api import OpenAIClient
+from typing import Dict, Optional
+from .openai_api import ClientOwner
 
 class ObjectGenerationInput(BaseModel):
     object_description: str = Field(..., description="A description of the object to generate")
     goal: str = Field(..., description="The goal of the generation process")
+    output_schema: Optional[Dict] = Field(None, description="Optional strict JSON output schema")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class GenerateObjectAgent:
+class GenerateObjectAgent(ClientOwner):
     """
     A class to generate objects based on a given description and goal using the OpenAI API.
 
@@ -21,7 +22,7 @@ class GenerateObjectAgent:
         generate_object(): Generates an object based on the description and goal.
     """
 
-    def __init__(self, data: ObjectGenerationInput):
+    def __init__(self, data: ObjectGenerationInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the GenerateObjectAgent object.
 
@@ -32,7 +33,8 @@ class GenerateObjectAgent:
         self.object_description = data.object_description
         self.goal = data.goal
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        self.output_schema = data.output_schema
+        super().__init__(openai_client)
 
     async def generate_object(self) -> Dict:
         """
@@ -43,6 +45,13 @@ class GenerateObjectAgent:
         """
         system_prompt = f"You are an assistant tasked with generating objects based on a given description. The goal is: {self.goal}."
         user_prompt = f"Generate an object based on the following description: {self.object_description}."
+
+        if self.output_schema is not None:
+            result = await self.openai_client.complete_object([
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ], self.output_schema, max_tokens=self.max_tokens)
+            return {"object_description": self.object_description, "generated_object": result}
 
         response = await self.openai_client.complete_chat([
             {"role": "system", "content": system_prompt},
