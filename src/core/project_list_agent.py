@@ -1,14 +1,14 @@
-import asyncio  # <-- Import asyncio here
+from .concurrency import map_concurrent  # <-- Import asyncio here
 from pydantic import BaseModel, Field
 from typing import List, Dict
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class ProjectListInput(BaseModel):
     list_to_project: List[str] = Field(..., description="The list of items to project")
     projection_rule: str = Field(..., description="The rule to apply for projection")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class ProjectListAgent:
+class ProjectListAgent(ClientOwner):
     """
     A class to project items in a list based on a given rule using the OpenAI API.
 
@@ -23,7 +23,7 @@ class ProjectListAgent:
         project_item(): Projects a single item based on the projection rule.
     """
 
-    def __init__(self, data: ProjectListInput):
+    def __init__(self, data: ProjectListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the ProjectListAgent object.
 
@@ -34,7 +34,7 @@ class ProjectListAgent:
         self.list_to_project = data.list_to_project
         self.projection_rule = data.projection_rule
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def project_list(self) -> List[Dict]:
         """
@@ -46,9 +46,9 @@ class ProjectListAgent:
         tasks = []
         for item in self.list_to_project:
             user_prompt = f"Project the following item based on the rule '{self.projection_rule}': {item}."
-            tasks.append(self.project_item(user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(self.project_item, tasks, self.openai_client.max_concurrency)
         return results
 
     async def project_item(self, user_prompt: str) -> Dict:

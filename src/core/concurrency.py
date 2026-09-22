@@ -48,3 +48,29 @@ class Semaphore:
         """
         async with self.semaphore:
             return await func(*args, **kwargs)
+
+
+async def map_concurrent(function, items, limit=8):
+    """Ordered map with a fixed worker count and cancellation on failure.
+
+    Unlike gather over every input, only ``limit`` tasks exist at a time.
+    """
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 1:
+        raise ValueError('limit must be a positive integer')
+    items = list(items)
+    results = [None] * len(items)
+    pending = iter(enumerate(items))
+
+    async def worker():
+        for index, item in pending:
+            results[index] = await function(item)
+
+    workers = [asyncio.create_task(worker()) for _ in range(min(limit, len(items)))]
+    try:
+        await asyncio.gather(*workers)
+    finally:
+        for task in workers:
+            if not task.done():
+                task.cancel()
+        await asyncio.gather(*workers, return_exceptions=True)
+    return results

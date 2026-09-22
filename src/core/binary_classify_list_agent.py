@@ -1,8 +1,7 @@
 from pydantic import BaseModel, Field
-import asyncio
+from .concurrency import map_concurrent
 from typing import List, Dict
-from .openai_api import OpenAIClient
-from .logging import Logger  # Using correct logging abstraction
+from .openai_api import ClientOwner
 
 class BinaryClassifyListInput(BaseModel):
     list_to_classify: List[str] = Field(..., description="The list of items to classify")
@@ -10,7 +9,7 @@ class BinaryClassifyListInput(BaseModel):
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
     temperature: float = Field(0.0, description="Sampling temperature for the OpenAI model")
 
-class BinaryClassifyListAgent:
+class BinaryClassifyListAgent(ClientOwner):
     """
     A class to classify items in a list based on binary criteria using the OpenAI API.
 
@@ -27,7 +26,7 @@ class BinaryClassifyListAgent:
         classify_item(user_prompt): Classifies a single item based on the criteria.
     """
 
-    def __init__(self, data: BinaryClassifyListInput):
+    def __init__(self, data: BinaryClassifyListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the BinaryClassifyListAgent object.
 
@@ -39,8 +38,8 @@ class BinaryClassifyListAgent:
         self.criteria = data.criteria
         self.max_tokens = data.max_tokens
         self.temperature = data.temperature
-        self.openai_client = OpenAIClient()
-        self.logger = Logger()
+        super().__init__(openai_client)
+        self.logger = self.openai_client.logger
 
     async def classify_list(self) -> List[Dict]:
         """
@@ -52,9 +51,9 @@ class BinaryClassifyListAgent:
         tasks = []
         for item in self.list_to_classify:
             user_prompt = f"Based on the following criteria '{self.criteria}', classify the item '{item}' as true or false."
-            tasks.append(self.classify_item(user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(self.classify_item, tasks, self.openai_client.max_concurrency)
         return results
 
     async def classify_item(self, user_prompt: str) -> Dict:
@@ -74,7 +73,7 @@ class BinaryClassifyListAgent:
         response = await self.openai_client.complete_chat([
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
-        ], max_tokens=self.max_tokens)
+        ], max_tokens=self.max_tokens, temperature=self.temperature)
 
         self.logger.info(f"Received response for item: {user_prompt} -> {response.strip()}")  # Logging the response
 

@@ -1,13 +1,13 @@
 from pydantic import BaseModel, Field
 from typing import List
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class ChainOfThoughtInput(BaseModel):
     question: str = Field(..., description="The question to solve using chain of thought reasoning")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
     temperature: float = Field(0.0, description="Sampling temperature for the OpenAI model")
 
-class ChainOfThoughtAgent:
+class ChainOfThoughtAgent(ClientOwner):
     """
     A class to solve problems using the 'chain of thought' reasoning process via the OpenAI API.
 
@@ -21,7 +21,7 @@ class ChainOfThoughtAgent:
         chain_of_thought(): Solves the question using chain of thought reasoning.
     """
 
-    def __init__(self, data: ChainOfThoughtInput):
+    def __init__(self, data: ChainOfThoughtInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the ChainOfThoughtAgent object.
 
@@ -32,7 +32,7 @@ class ChainOfThoughtAgent:
         self.question = data.question
         self.max_tokens = data.max_tokens
         self.temperature = data.temperature
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def chain_of_thought(self) -> str:
         """

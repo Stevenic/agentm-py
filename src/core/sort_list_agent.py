@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 import asyncio
 from typing import List
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class SortListInput(BaseModel):
     goal: str = Field(..., description="The goal for sorting the list")
@@ -10,7 +10,7 @@ class SortListInput(BaseModel):
     temperature: float = Field(0.0, description="Sampling temperature for the OpenAI model")
     log_explanations: bool = Field(False, description="Whether to log explanations of sorting decisions")
 
-class SortListAgent:
+class SortListAgent(ClientOwner):
     """
     A class to sort items in a list based on a given goal using the OpenAI API.
 
@@ -29,7 +29,7 @@ class SortListAgent:
         merge(left, right): Merges two sorted lists into one.
     """
 
-    def __init__(self, data: SortListInput):
+    def __init__(self, data: SortListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the SortListAgent object.
 
@@ -42,7 +42,7 @@ class SortListAgent:
         self.max_tokens = data.max_tokens
         self.temperature = data.temperature
         self.log_explanations = data.log_explanations
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def sort(self):
         """

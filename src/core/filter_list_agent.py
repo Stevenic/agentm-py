@@ -1,9 +1,10 @@
 from pydantic import BaseModel, Field
-import asyncio
+from functools import partial
+from .concurrency import map_concurrent
 import json
 import jsonschema
 from typing import List, Dict
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class FilterListInput(BaseModel):
     goal: str = Field(..., description="The goal for filtering the list")
@@ -11,7 +12,7 @@ class FilterListInput(BaseModel):
     max_tokens: int = Field(500, description="The maximum number of tokens to generate")
     temperature: float = Field(0.0, description="Sampling temperature for the OpenAI model")
 
-class FilterListAgent:
+class FilterListAgent(ClientOwner):
     """
     A class to filter items in a list based on a given goal using the OpenAI API.
 
@@ -36,10 +37,13 @@ class FilterListAgent:
             "explanation": {"type": "string"},
             "remove_item": {"type": "boolean"}
         },
-        "required": ["explanation", "remove_item"]
+        "required": ["explanation", "remove_item"],
+        "additionalProperties": False
     }
 
-    def __init__(self, data: FilterListInput):
+    _validator = jsonschema.Draft202012Validator(schema)
+
+    def __init__(self, data: FilterListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the FilterListAgent object.
 
@@ -51,7 +55,7 @@ class FilterListAgent:
         self.items = data.items_to_filter
         self.max_tokens = data.max_tokens
         self.temperature = data.temperature
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def filter(self) -> List[Dict]:
         """
@@ -73,25 +77,21 @@ class FilterListAgent:
             List[Dict]: A list of dictionaries with the filtering results.
         """
         system_prompt = (
-            "You are an assistant tasked with filtering a list of items. The goal is: "
-            f"{self.goal}. For each item, decide if it should be removed based on whether it is a healthy snack.\n"
-            "Respond in the following structured format:\n\n"
-            "Example:\n"
-            "{\"explanation\": \"The apple is a healthy snack option, as it is low in calories...\",\n"
-            " \"remove_item\": false}\n\n"
-            "Example:\n"
-            "{\"explanation\": \"A chocolate bar is generally considered an unhealthy snack...\",\n"
-            " \"remove_item\": true}\n\n"
+            f"Filter items according to this goal: {self.goal}. "
+            "Return JSON with a brief explanation and remove_item (boolean)."
         )
 
         tasks = []
         for index, item in enumerate(items):
             user_prompt = f"Item {index+1}: {item}. Should it be removed? Answer with explanation and 'remove_item': true/false."
-            tasks.append(self.filter_item(system_prompt, user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(partial(self.filter_item, system_prompt), tasks, self.openai_client.max_concurrency)
 
-        filtered_items = [self.items[i] for i, result in enumerate(results) if not result.get('remove_item', False)]
+        if any('error' in result for result in results):
+            raise ValueError('Filtering failed: invalid model response')
+
+        filtered_items = [items[i] for i, result in enumerate(results) if not result.get('remove_item', False)]
         print("\nFinal Filtered List:", filtered_items)
 
         return results
@@ -110,7 +110,10 @@ class FilterListAgent:
         response = await self.openai_client.complete_chat([
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
-        ], max_tokens=self.max_tokens)
+        ], max_tokens=self.max_tokens, temperature=self.temperature,
+            response_format={"type": "json_schema", "json_schema": {
+                "name": "filter_result", "strict": True, "schema": self.schema,
+            }})
 
         return await self.process_response(response, system_prompt, user_prompt)
 
@@ -129,10 +132,17 @@ class FilterListAgent:
         """
         try:
             result = json.loads(response)
-            jsonschema.validate(instance=result, schema=self.schema)
+            self._validator.validate(result)
             return result
         except (json.JSONDecodeError, jsonschema.ValidationError) as e:
             if retry:
-                return await self.filter_item(system_prompt, user_prompt)
+                response = await self.openai_client.complete_chat([
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ], max_tokens=self.max_tokens, temperature=self.temperature,
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "filter_result", "strict": True, "schema": self.schema,
+                    }})
+                return await self.process_response(response, system_prompt, user_prompt, retry=False)
             else:
                 return {"error": f"Failed to parse response after retry: {str(e)}", "response": response, "item": user_prompt}

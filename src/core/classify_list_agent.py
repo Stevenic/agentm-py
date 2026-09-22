@@ -1,14 +1,14 @@
 from pydantic import BaseModel, Field
-import asyncio
+from .concurrency import map_concurrent
 from typing import List, Dict
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class ClassifyListInput(BaseModel):
     list_to_classify: List[str] = Field(..., description="The list of items to classify")
     classification_criteria: str = Field(..., description="The criteria for classifying the items")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class ClassifyListAgent:
+class ClassifyListAgent(ClientOwner):
     """
     A class to classify items in a list based on given criteria using the OpenAI API.
 
@@ -23,7 +23,7 @@ class ClassifyListAgent:
         classify_item(user_prompt): Classifies a single item based on the classification criteria.
     """
 
-    def __init__(self, data: ClassifyListInput):
+    def __init__(self, data: ClassifyListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the ClassifyListAgent object.
 
@@ -34,7 +34,7 @@ class ClassifyListAgent:
         self.list_to_classify = data.list_to_classify
         self.classification_criteria = data.classification_criteria
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def classify_list(self) -> List[Dict]:
         """
@@ -46,9 +46,9 @@ class ClassifyListAgent:
         tasks = []
         for item in self.list_to_classify:
             user_prompt = f"Classify the item '{item}' according to the following criteria: {self.classification_criteria}."
-            tasks.append(self.classify_item(user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(self.classify_item, tasks, self.openai_client.max_concurrency)
         return results
 
     async def classify_item(self, user_prompt: str) -> Dict:

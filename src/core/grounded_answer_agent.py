@@ -3,7 +3,7 @@ import asyncio
 import json
 import jsonschema
 from typing import Dict
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class GroundedAnswerInput(BaseModel):
     question: str = Field(..., description="The question to answer based on the provided context")
@@ -11,7 +11,7 @@ class GroundedAnswerInput(BaseModel):
     instructions: str = Field('', description="Additional instructions for answering the question")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class GroundedAnswerAgent:
+class GroundedAnswerAgent(ClientOwner):
     """
     A class to provide grounded answers based on a given context using the OpenAI API.
 
@@ -40,7 +40,7 @@ class GroundedAnswerAgent:
         "additionalProperties": False
     }
 
-    def __init__(self, data: GroundedAnswerInput):
+    def __init__(self, data: GroundedAnswerInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the GroundedAnswerAgent object.
 
@@ -52,7 +52,7 @@ class GroundedAnswerAgent:
         self.context = data.context
         self.instructions = data.instructions
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def answer(self) -> Dict:
         """

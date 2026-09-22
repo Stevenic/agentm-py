@@ -1,13 +1,13 @@
-import asyncio  # <-- Import asyncio here
+from .concurrency import map_concurrent  # <-- Import asyncio here
 from pydantic import BaseModel, Field
 from typing import List, Dict
-from .openai_api import OpenAIClient
+from .openai_api import ClientOwner
 
 class SummarizeListInput(BaseModel):
     list_to_summarize: List[str] = Field(..., description="The list of items to summarize")
     max_tokens: int = Field(1000, description="The maximum number of tokens to generate")
 
-class SummarizeListAgent:
+class SummarizeListAgent(ClientOwner):
     """
     A class to summarize items in a list using the OpenAI API.
 
@@ -21,7 +21,7 @@ class SummarizeListAgent:
         summarize_item(): Summarizes a single item.
     """
 
-    def __init__(self, data: SummarizeListInput):
+    def __init__(self, data: SummarizeListInput, *, openai_client=None):
         """
         Constructs all the necessary attributes for the SummarizeListAgent object.
 
@@ -31,7 +31,7 @@ class SummarizeListAgent:
         """
         self.list_to_summarize = data.list_to_summarize
         self.max_tokens = data.max_tokens
-        self.openai_client = OpenAIClient()
+        super().__init__(openai_client)
 
     async def summarize_list(self) -> List[Dict]:
         """
@@ -43,9 +43,9 @@ class SummarizeListAgent:
         tasks = []
         for item in self.list_to_summarize:
             user_prompt = f"Summarize the following: {item}."
-            tasks.append(self.summarize_item(user_prompt))
+            tasks.append(user_prompt)
 
-        results = await asyncio.gather(*tasks)
+        results = await map_concurrent(self.summarize_item, tasks, self.openai_client.max_concurrency)
         return results
 
     async def summarize_item(self, user_prompt: str) -> Dict:
